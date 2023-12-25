@@ -26,7 +26,7 @@ public class MemberController {
     public String createMember(MemberForm form) {
         log.info(form.toString());//DTO담긴거(MemberForm) 확인
         Member member=form.toEntity();//DTO를 member 엔티티로 변환
-        log.info(member.toString()));//엔티티 변환(member) 확인
+        log.info(member.toString());//엔티티 변환(member) 확인
         Member saved=memberRepository.save(member);//엔티티를 레포지토리로 DB에 저장
         log.info(saved.toString());//DB저장확인(member)
 
