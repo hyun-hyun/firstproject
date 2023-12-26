@@ -1,0 +1,45 @@
+{{>layouts/header}}
+<a href="/signup">회원가입</a>
+<a href="/article/new">글쓰기</a>
+<table class="table">
+    <h1>Articles</h1>
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#articleList}} {{!모델에 등록한 articleList Entity 출력}}
+      <tr>
+        <th>{{id}}</th>
+        <td><a href="/articles/{{id}}">{{title}}</a></td>
+        <td>{{content}}</td>
+      </tr>
+      {{/articleList}}
+    </tbody>
+</table>
+<a href="/articles">More Article</a>
+
+<h1>Members</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nickname</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#memberList}} {{!모델에 등록한 memberList Entity 출력}}
+      <tr>
+        <th>{{id}}</th>
+        <td>s{{nickname}}</td>
+        <td>{{email}}</td>
+      </tr>
+      {{/memberList}}
+    </tbody>
+</table>
+<a href="/members">More Member</a>
+{{>layouts/footer}}

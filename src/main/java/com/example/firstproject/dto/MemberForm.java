@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @AllArgsConstructor //클래스 모든 필드의 생성자 만듬
+//@NoArgsConstructor //기본생성자(아무것도 없는거)
 @ToString //클래스 모든 필드의 String으로 확인하는 것 오버라이딩
 public class MemberForm {
     private String nickname;

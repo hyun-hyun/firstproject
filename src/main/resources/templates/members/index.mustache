@@ -1,0 +1,21 @@
+{{>layouts/header}}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nickname</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#memberList}} {{!모델에 등록한 memberList Entity 출력}}
+      <tr>
+        <th>{{id}}</th>
+        <td><a href="/members/{{id}}">{{nickname}}</a></td>
+        <td>{{email}}</td>
+      </tr>
+      {{/memberList}}
+    </tbody>
+  </table>
+  <a href="/" >Go to Main</a>
+{{>layouts/footer}}
