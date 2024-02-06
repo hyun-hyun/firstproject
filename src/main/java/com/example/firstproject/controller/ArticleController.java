@@ -13,6 +13,9 @@ import com.example.firstproject.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 
 
@@ -42,7 +45,7 @@ public class ArticleController {
         return "redirect:/articles/"+saved.getId();
     }
     
-    @GetMapping("/articles/{id}") //컨트롤러 변수{}, 뷰 변수{}
+    @GetMapping("/articles/{id}") //컨트롤러 변수{}, 뷰 변수{{}}
     public String show(@PathVariable Long id, Model model){//매개변수로 url의 id받아오기
         log.info("id= "+id);//id잘 받았는지 확인
         //1. id조회해서 데이터(entity, Optional<Article>) 가져오기
@@ -71,5 +74,33 @@ public class ArticleController {
         model.addAttribute("article", articleEntity);
         //뷰페이지 설정
         return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form){//매개변수로 DTO받기
+        log.info(form.toString());
+        //1. DTO->entity
+        Article articleEntity=form.toEntity();
+        log.info(articleEntity.toString());
+        //2.entity DB에 저장
+        Article target=articleRepository.findById(articleEntity.getId()).orElse(null);
+        if(target !=null){
+            articleRepository.save(articleEntity);//갱신
+        }
+        return "redirect:/articles/"+articleEntity.getId();
+    }
+    @GetMapping("articles/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes rttr){
+        log.info("삭제 요청이 들어왔습니다.");
+        //1. 삭제 대상 가져오기
+        Article target=articleRepository.findById(id).orElse(null);
+        log.info(target.toString());//target 데이터 확인
+        //2. 대상 엔티티 삭제
+        if(target !=null){
+            articleRepository.delete(target);
+            rttr.addFlashAttribute("msg","삭제됐습니다!");//리다이렉트된 페이지에서 사용
+        }
+        //3. 결과 페이지로 리다이렉트
+        return "redirect:/articles";
     }
 }

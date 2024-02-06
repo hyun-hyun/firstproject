@@ -1,4 +1,6 @@
 {{>layouts/header}}
+<h1>Members</h1>
+<h2>상세페이지</h2>
 <table class="table">
     <thead>
       <tr>
@@ -17,6 +19,7 @@
       {{/member}}
     </tbody>
   </table>
-  <a href="/articles/{{member.id}}/edit" class="btn btn-priamary">Edit</a>
-  <a href="/members">Go to member list</a>
+  <a href="/members/{{id}}/edit" class="btn btn-primary">수정하기</a>
+  <a href="/members/{{id}}/delete" class="btn btn-danger">삭제하기</a>
+  <a href="/members" class="btn btn-success">Go to member list</a>
 {{>layouts/footer}}

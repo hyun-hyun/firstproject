@@ -1,4 +1,6 @@
 {{>layouts/header}}
+<h1>Articles</h1>
+<h2>상세페이지</h2>
 <table class="table">
     <thead>
       <tr>
@@ -14,9 +16,11 @@
         <td>{{title}}</td>
         <td>{{content}}</td>
       </tr>
-      {{/article}}
+      
     </tbody>
   </table>
-  <a href="/articles/{{article.id}}/edit" class="btn btn-priamary">Edit</a>
-  <a href="/articles">Go to Article List</a>
+  <a href="/articles/{{id}}/edit" class="btn btn-primary">Edit</a>
+  <a href="/articles/{{id}}/delete" class="btn btn-danger">Deletes</a>
+  <a href="/articles" class="btn btn-success">Go to Article List</a>
+  {{/article}}
 {{>layouts/footer}}
