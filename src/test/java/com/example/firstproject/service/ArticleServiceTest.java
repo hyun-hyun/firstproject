@@ -22,7 +22,11 @@ public class ArticleServiceTest {
         Article a= new Article(1L, "가가가가", "1111");
         Article b= new Article(2L, "나나나나", "2222");
         Article c= new Article(3L, "다다다다", "3333");
-        List<Article> expected=new ArrayList<Article>(Arrays.asList(a,b,c));
+        Article d= new Article(4L, "당신의 인생 영화는?", "댓글 ㄱㄱ");
+        Article e= new Article(5L, "당신의 소울 푸드는?", "댓글달아주세요");
+        Article f= new Article(6L, "당신의 취미는?", "댓글 ㄱㄱㄱ");
+        
+        List<Article> expected=new ArrayList<Article>(Arrays.asList(a,b,c,d,e,f));
         //2. 실제 데이터
         List<Article> articles=articleService.index();
         //3. 비교 및 검증
@@ -57,7 +61,7 @@ public class ArticleServiceTest {
         String title="라라라라";
         String content="4444";
         ArticleForm dto=new ArticleForm(null, title, content);
-        Article expected=new Article(4L, title, content);
+        Article expected=new Article(7L, title, content);
         //2. 실제데이터
         Article article=articleService.create(dto);
         //3. 비교 및 검증

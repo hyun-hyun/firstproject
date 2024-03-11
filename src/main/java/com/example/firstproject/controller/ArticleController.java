@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.firstproject.dto.ArticleForm;
+import com.example.firstproject.dto.CommentDto;
 import com.example.firstproject.entity.Article;
 import com.example.firstproject.repository.ArticleRepository;
+import com.example.firstproject.service.CommentService;
 
 import lombok.extern.slf4j.Slf4j;
 import java.util.*;
@@ -24,6 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ArticleController {
     @Autowired //DI의존성주입, 스프링부트가 미리 생성해둔 레파지터리 객체 주입
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;//서비스 객체 주입
 
     @GetMapping("/articles/new")
     public String newArticleForm(){
@@ -50,10 +54,12 @@ public class ArticleController {
         log.info("id= "+id);//id잘 받았는지 확인
         //1. id조회해서 데이터(entity, Optional<Article>) 가져오기
         Article articleEntity=articleRepository.findById(id).orElse(null);//id없으면 null넣기
+        List<CommentDto> commentsDtos=commentService.comments(id);
         //2. 모델에 데이터 등록
         model.addAttribute("article", articleEntity);
+        model.addAttribute("commentDtos", commentsDtos);
         //3. 뷰 페이지 반환
-        return "/articles/show";
+        return "articles/show";
     }
 
     @GetMapping("/articles")
@@ -63,7 +69,7 @@ public class ArticleController {
         //2. 모델에 데이터 등록
         model.addAttribute("articleList", articleEntityList);
         //3. 뷰 페이지 설정
-        return "/articles/index";
+        return "articles/index";
     }
 
     @GetMapping("/articles/{id}/edit")
